@@ -1,12 +1,12 @@
 # Any Record Hierarchy - User Guide
 
-## Setup Guide
+### Setup Guide
 
 https://salesforce.quip.com/US6zAozquu7g
 
-## AppExchange URL
+### AppExchange URL
 
-https://appexchange.salesforce.com/appxListingDetail?listingId=a0N3A00000G12hNUAR&preview=%222020-06-26T11%3A11%3A42.000Z%22
+https://appexchange.salesforce.com/appxListingDetail?listingId=a0N3A00000G12hNUAR
 
 ## Overview
 
