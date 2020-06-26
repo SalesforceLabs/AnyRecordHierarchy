@@ -1,0 +1,147 @@
+<template>
+  <template if:false={isMoreItems}>
+    <div class={deviceSize}>
+      <div class="myItem" onclick={selectRecord}>
+        <div class="outer-avatar">
+          <c-avatar
+            if:true={visual.Abbreviation}
+            initials={fieldData.ARH__Visual_Field__c.value}
+            device-size={deviceSize}
+          ></c-avatar>
+          <c-avatar
+            if:true={visual.Image}
+            src={fieldData.ARH__Visual_Field__c.value}
+            device-size={deviceSize}
+          ></c-avatar>
+        </div>
+        <div class="inlineItem marginLeft">
+          <span class="name">
+            <template if:true={metadata.ARH__Detail_Field_1__c}>
+              <c-field
+                field-metadata={metadata.ARH__Detail_Field_1__c}
+                field-data={fieldData.ARH__Detail_Field_1__c}
+                device-size={deviceSize}
+              ></c-field>
+            </template>
+            <div class="content slds-col slds-size_5-of-12">
+              <section
+                class="slds-popover slds-nubbin_bottom"
+                style="min-height: 130px; width: var(--lwc-sizeSmall, 20rem);"
+                role="dialog"
+              >
+                <div class="slds-popover__body">
+                  <dl class="slds-popover__body-list">
+                    <dt class="slds-m-bottom_small">
+                      <div class="slds-media slds-media_center">
+                        <div class="slds-media__figure">
+                          <lightning-icon
+                            icon-name="standard:hierarchy"
+                            alternative-text="Record Hierarchy"
+                            title="Record Hierarchy"
+                            size="small"
+                          ></lightning-icon>
+                        </div>
+                        <div class="slds-media__body">
+                          <p
+                            class="slds-text-heading_small slds-hyphenate slds-truncate"
+                          >
+                            <template if:true={metadata.ARH__Detail_Field_1__c}>
+                              <div class="slds-truncate">
+                                <c-field
+                                  field-metadata={metadata.ARH__Detail_Field_1__c}
+                                  field-data={fieldData.ARH__Detail_Field_1__c}
+                                  device-size={deviceSize}
+                                ></c-field>
+                              </div>
+                            </template>
+                          </p>
+                        </div>
+                      </div>
+                    </dt>
+                    <dd class="slds-m-top_x-small">
+                      <div class="inlineItem marginLeft">
+                        <span class="title"
+                          ><template if:true={metadata.ARH__Detail_Field_2__c}>
+                            <div>
+                              <c-field
+                                field-metadata={metadata.ARH__Detail_Field_2__c}
+                                field-data={fieldData.ARH__Detail_Field_2__c}
+                                device-size={deviceSize}
+                                variant="show-label"
+                              ></c-field>
+                            </div>
+                          </template>
+
+                          <template if:true={metadata.ARH__Detail_Field_3__c}>
+                            <div>
+                              <c-field
+                                field-metadata={metadata.ARH__Detail_Field_3__c}
+                                field-data={fieldData.ARH__Detail_Field_3__c}
+                                device-size={deviceSize}
+                                variant="show-label"
+                              ></c-field>
+                            </div>
+                          </template>
+                          <template if:true={metadata.ARH__Detail_Field_4__c}>
+                            <div>
+                              <c-field
+                                field-metadata={metadata.ARH__Detail_Field_4__c}
+                                field-data={fieldData.ARH__Detail_Field_4__c}
+                                device-size={deviceSize}
+                                variant="show-label"
+                              ></c-field>
+                            </div>
+                          </template>
+                        </span>
+                      </div>
+                    </dd>
+                  </dl>
+                </div>
+              </section>
+            </div>
+          </span>
+          <span class="title"
+            ><template if:true={metadata.ARH__Detail_Field_2__c}>
+              <div>
+                <c-field
+                  field-metadata={metadata.ARH__Detail_Field_2__c}
+                  field-data={fieldData.ARH__Detail_Field_2__c}
+                  device-size={deviceSize}
+                ></c-field>
+              </div>
+            </template>
+            <template if:true={isCurrentRecord}>
+              <template if:true={metadata.ARH__Detail_Field_3__c}>
+                <div>
+                  <c-field
+                    field-metadata={metadata.ARH__Detail_Field_3__c}
+                    field-data={fieldData.ARH__Detail_Field_3__c}
+                    device-size={deviceSize}
+                  ></c-field>
+                </div>
+              </template>
+              <template if:true={metadata.ARH__Detail_Field_4__c}>
+                <div>
+                  <c-field
+                    field-metadata={metadata.ARH__Detail_Field_4__c}
+                    field-data={fieldData.ARH__Detail_Field_4__c}
+                    device-size={deviceSize}
+                  ></c-field>
+                </div>
+              </template>
+            </template>
+          </span>
+        </div>
+      </div>
+      <div class="small-content">
+        <div>
+          <c-field
+            field-metadata={metadata.ARH__Detail_Field_1__c}
+            field-data={fieldData.ARH__Detail_Field_1__c}
+            device-size={deviceSize}
+          ></c-field>
+        </div>
+      </div>
+    </div>
+  </template>
+</template>

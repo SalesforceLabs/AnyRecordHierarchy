@@ -1,0 +1,165 @@
+<template>
+  <div class={flexipageRegionWidth}>
+    <article class="slds-card hierarchyContainerMain">
+      <div class="slds-card__header slds-grid" if:false={configDataError}>
+        <header
+          class="header slds-media slds-media_center slds-has-flexi-truncate"
+        >
+          <div class="slds-media__figure">
+            <lightning-icon
+              if:true={showParents}
+              icon-name="standard:hierarchy"
+              alternative-text="Record Hierarchy"
+              title="Record Hierarchy"
+            ></lightning-icon>
+            <lightning-icon
+              if:false={showParents}
+              icon-name="utility:back"
+              alternative-text="Back"
+              title="Back"
+              size="small"
+              onclick={handleShowParents}
+            ></lightning-icon>
+          </div>
+          <div class="slds-media__body">
+            <h2 class="slds-card__header-title" if:true={showParents}>
+              <span>{pageTitle}</span>
+            </h2>
+            <template if:false={showParents}>
+              <template if:true={hierarchyData}>
+                <template
+                  for:each={hierarchyData.currentRecord}
+                  for:item="record"
+                >
+                  <div key={record.Id} class="current-record box">
+                    <c-arh-tile
+                      metadata={configMetadata}
+                      ref-obj-name-fields={refObjNameFields}
+                      record={record}
+                      visual-type={visualType}
+                      mode="header"
+                    ></c-arh-tile>
+                  </div>
+                </template>
+              </template>
+            </template>
+          </div>
+          <div class="slds-no-flex" if:true={showParents}>
+            <span>
+              <span class="search-top">
+                <c-search
+                  search-object={objectApiName}
+                  display-field={searchDisplayField}
+                  onrecordselect={handleRecordSelect}
+                ></c-search>
+              </span>
+            </span>
+          </div>
+        </header>
+      </div>
+      <div class="slds-card__body">
+        <c-illustration
+          error-data={configDataError}
+          if:true={configDataError}
+        ></c-illustration>
+        <div
+          class="main-container"
+          style="min-height: 350px;"
+          if:false={configDataError}
+        >
+          <div
+            class="sub-container-1 slds-container_small"
+            if:true={showParents}
+          >
+            <span>
+              <span class="search">
+                <c-search
+                  search-object={objectApiName}
+                  display-field={searchDisplayField}
+                  onrecordselect={handleRecordSelect}
+                ></c-search
+              ></span>
+            </span>
+          </div>
+          <template if:false={loaded}>
+            <!-- <div style="position: absolute; left: 50%; top: 320px;"> -->
+            <lightning-spinner
+              alternative-text="Loading"
+              variant="brand"
+            ></lightning-spinner>
+            <!-- </div> -->
+          </template>
+          <!-- <template if:true={loaded}> -->
+          <div class="sub-container-2">
+            <template if:false={allhierarchy}>
+              <template if:true={hierarchyData}>
+                <c-parent-record-container
+                  if:true={showParents}
+                  parent-records={hierarchyData.parentRecords}
+                  current-record={hierarchyData.currentRecord}
+                  left-peer-array={leftPeerArray}
+                  right-peer-array={rightPeerArray}
+                  config-info={configMetadata}
+                  ref-obj-name-fields={refObjNameFields}
+                  visual-type={visualType}
+                  onrecordselect={handleRecordSelect}
+                  device-size-actual={flexipageRegionWidth}
+                  onloadpeers={loadPeers}
+                  onshowhierarchy={showHierarchy}
+                  element-width={elementWidth}
+                ></c-parent-record-container>
+
+                <c-child-record-container
+                  child-records={hierarchyData.childRecords}
+                  config-info={configMetadata}
+                  ref-obj-name-fields={refObjNameFields}
+                  device-size={flexipageRegionWidth}
+                  visual-type={visualType}
+                  relation-field={relationField}
+                  search-display-field={searchDisplayField}
+                  parent-record-id={recordId}
+                  object-api-name={objectApiName}
+                  show-parent={showParents}
+                  onrecordselect={handleRecordSelect}
+                  onsetparentsvisible={handleParentVisibility}
+                  onviewall={showMoreItems}
+                ></c-child-record-container>
+
+                <template if:true={showViewAll}>
+                  <c-view-all-child-records
+                    child-records={hierarchyData.childRecords}
+                    config-info={configMetadata}
+                    ref-obj-name-fields={refObjNameFields}
+                    device-size={flexipageRegionWidth}
+                    visual-type={visualType}
+                    relation-field={relationField}
+                    search-display-field={searchDisplayField}
+                    parent-record-id={recordId}
+                    object-api-name={objectApiName}
+                    onrecordselect={handleRecordSelect}
+                    onsetparentsvisible={handleParentVisibility}
+                  >
+                  </c-view-all-child-records>
+                </template>
+              </template>
+            </template>
+            <template if:true={allhierarchy}>
+              <c-full-hierarchy
+                parent-records={parentHierarchy}
+                config-info={configMetadata}
+                ref-obj-name-fields={refObjNameFields}
+                device-size="MEDIUM"
+                visual-type={visualType}
+                onrecordselect={handleRecordSelect}
+                onbackhome={handleHomeEvent}
+                onshowhierarchy={showHierarchy}
+              ></c-full-hierarchy>
+            </template>
+          </div>
+          <!-- </template> -->
+        </div>
+      </div>
+      <footer class="slds-card__footer"></footer>
+    </article>
+  </div>
+</template>

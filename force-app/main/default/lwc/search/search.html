@@ -1,0 +1,89 @@
+<template>
+  <div class="slds-form-element">
+    <!-- <label class="slds-form-element__label" for="combobox-id-12">Search</label> -->
+    <div class="slds-form-element__control">
+      <div class="slds-combobox_container">
+        <div
+          class={getDropdownClass}
+          aria-expanded="true"
+          aria-haspopup="listbox"
+          role="combobox"
+        >
+          <lightning-input
+            class="input"
+            name="enter-search"
+            type="search"
+            onchange={handleKeyChange}
+            value={searchKey}
+            placeholder={placeholderText}
+            onblur={handleBlur}
+            onfocus={handleFocus}
+            variant="label-hidden"
+          ></lightning-input>
+
+          <div
+            id="listbox-id-10"
+            class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid"
+            role="listbox"
+          >
+            <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+              <!-- Spinner to display when waiting for results of search -->
+              <div if:true={loading}>
+                <lightning-spinner
+                  alternative-text="Loading"
+                  size="small"
+                  variant="brand"
+                ></lightning-spinner>
+              </div>
+              <!-- Display if results are present -->
+              <template
+                for:each={searchResults}
+                for:item="result"
+                if:true={isExpanded}
+              >
+                <li
+                  key={result.id}
+                  role="presentation"
+                  class="slds-listbox__item"
+                >
+                  <div
+                    class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small"
+                    role="option"
+                    onclick={handleResultClick}
+                    data-recordid={result.Id}
+                    data-displayvalue={result.displayValue}
+                  >
+                    <span
+                      class="slds-media__figure slds-listbox__option-icon"
+                    ></span>
+                    <span class="slds-media__body">
+                      <span class="slds-truncate" title={result.displayValue}
+                        >{result.displayValue}</span
+                      >
+                    </span>
+                  </div>
+                </li>
+              </template>
+              <!-- Display that there are no results -->
+              <template if:true={resultsInit}>
+                <li role="presentation" class="slds-listbox__item">
+                  <span
+                    class="slds-media slds-listbox__option_entity"
+                    role="option"
+                  >
+                    <span if:false={loading} class="slds-media__body">
+                      No results found.
+                    </span>
+                    <span if:true={loading} class="slds-media__body">
+                      Loading...
+                    </span>
+                  </span>
+                </li>
+              </template>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

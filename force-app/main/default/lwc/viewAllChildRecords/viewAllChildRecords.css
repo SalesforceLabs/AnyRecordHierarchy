@@ -1,0 +1,46 @@
+.pageInputWidth {
+  width: 3.5rem;
+}
+
+.flex-container {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  -ms-box-orient: horizontal;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.nowrap {
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+}
+
+.MEDIUM .wrap {
+  justify-content: space-between;
+  padding: 10px;
+  grid-template-columns: repeat(auto-fill, 215px);
+  /* flex-flow: column wrap; */
+  /* grid-gap: 1rem; */
+  /* grid-template-columns: repeat(auto-fill, 100px); */
+  display: grid;
+}
+
+.SMALL .wrap {
+  justify-content: space-between;
+  padding: 10px;
+  grid-template-columns: repeat(auto-fill, 100px);
+  /* flex-flow: column wrap; */
+  /* grid-gap: 1rem; */
+  /* grid-template-columns: repeat(auto-fill, 100px); */
+  display: grid;
+}
+
+.flex-item {
+  height: 50px;
+  margin: 10px;
+}

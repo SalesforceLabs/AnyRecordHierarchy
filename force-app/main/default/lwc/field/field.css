@@ -1,0 +1,32 @@
+.truncate-width {
+  max-width: 135px;
+  height: 19px;
+}
+
+.MEDIUM.current-record .truncate-width {
+  max-width: 150px;
+  height: 19px;
+}
+
+.SMALL .truncate-width {
+  max-width: 80px;
+  text-align: center;
+  height: 19px;
+}
+
+.flexClass {
+  display: flex;
+}
+
+.labelClass {
+  width: 5rem;
+}
+
+.truncate-width-small {
+  max-width: 120px;
+  height: 19px;
+}
+
+.maxHeight {
+  height: 19px;
+}

@@ -1,0 +1,204 @@
+<template>
+  <template if:false={loaded}>
+    <lightning-spinner
+      alternative-text="Loading"
+      variant="brand"
+    ></lightning-spinner>
+  </template>
+  <template if:true={loaded}>
+    <div>
+      <div class="rootnode" if:true={disableLoadMore} onclick={refreshParent}>
+        <div class="enable">
+          <div
+            style="
+              width: 15px;
+              height: 15px;
+              background: #004487;
+              border-radius: 2.5em;
+              animation: glowImage 1.5s linear infinite alternate;
+            "
+          ></div>
+        </div>
+      </div>
+      <div class="rootnode" if:false={disableLoadMore}>
+        <div
+          style="
+            width: 15px;
+            height: 15px;
+            background: #dddbda;
+            border-radius: 2.5em;
+          "
+        ></div>
+      </div>
+
+      <div class="parentnode">
+        <div class="divider"></div>
+      </div>
+      <template if:true={tranformedParents}>
+        <div>
+          <template for:each={tranformedParents} for:item="record">
+            <div key={record.Id}>
+              <c-arh-tile
+                metadata={configInfo}
+                ref-obj-name-fields={refObjNameFields}
+                record={record}
+                device-size={deviceSize}
+                is-more-items={isMoreItems}
+                visual-type={visualType}
+                onrecordclick={handleRecordClick}
+              ></c-arh-tile>
+              <div class="parentnode">
+                <div class="divider"></div>
+              </div>
+            </div>
+          </template>
+        </div>
+      </template>
+
+      <template if:true={currentRecord}>
+        <div class="flex-container">
+          <ul class="box peersLeft">
+            <template
+              for:each={peers.left}
+              for:item="item"
+              for:index="index"
+              if:false={isSmallWidth}
+            >
+              <li key={item.Id} class="flex-item">
+                <c-arh-tile
+                  metadata={configInfo}
+                  ref-obj-name-fields={refObjNameFields}
+                  record={item}
+                  device-size="SMALL"
+                  is-more-items={isMoreItems}
+                  visual-type={visualType}
+                  onrecordclick={handlePeerRecordClick}
+                  data-dir="left"
+                  data-pos={index}
+                  data-id={item.Id}
+                ></c-arh-tile>
+              </li>
+            </template>
+          </ul>
+
+          <div class="flex-item peerArrowLeft">
+            <div
+              if:true={activeControls.left}
+              onclick={movePeerRight}
+              class="move-icon"
+              title="Move Left"
+            >
+              <span class="slds-icon_container" title="Move Left">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  class="slds-icon"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M15.8 22l-9.6-9.4c-.3-.3-.3-.8 0-1.1l9.6-9.4c.3-.3.7-.3 1 0l1 1c.3.3.3.7 0 1l-7.6 7.4c-.3.3-.3.8 0 1.1l7.5 7.4c.3.3.3.7 0 1l-1 1c-.2.2-.6.2-.9 0z"
+                  ></path>
+                </svg>
+                <span class="slds-assistive-text">Move Left</span>
+              </span>
+            </div>
+            <div if:false={activeControls.left}>
+              <span class="slds-icon_container" title="Move Left Disabled">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  class="slds-icon slds-icon-text-light"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M15.8 22l-9.6-9.4c-.3-.3-.3-.8 0-1.1l9.6-9.4c.3-.3.7-.3 1 0l1 1c.3.3.3.7 0 1l-7.6 7.4c-.3.3-.3.8 0 1.1l7.5 7.4c.3.3.3.7 0 1l-1 1c-.2.2-.6.2-.9 0z"
+                  ></path>
+                </svg>
+                <span class="slds-assistive-text">Move Left</span>
+              </span>
+            </div>
+          </div>
+
+          <template for:each={currentRecord} for:item="record">
+            <div key={record.Id} class="current-record box">
+              <c-arh-tile
+                metadata={configInfo}
+                ref-obj-name-fields={refObjNameFields}
+                record={record}
+                device-size={currentRecordStyle}
+                is-more-items={isMoreItems}
+                visual-type={visualType}
+                onrecordclick={handleRecordClick}
+              ></c-arh-tile>
+            </div>
+          </template>
+
+          <div class="flex-item peerArrowRight">
+            <div
+              if:true={activeControls.right}
+              onclick={movePeerLeft}
+              class="move-icon"
+              title="Move Left"
+            >
+              <span class="slds-icon_container" title="Move Right">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  class="slds-icon"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M8.3 2l9.5 9.5c.3.3.3.7 0 1L8.3 22c-.3.2-.8.2-1.1 0l-1-1c-.2-.3-.2-.8 0-1.1l7.6-7.4c.2-.3.2-.7 0-1L6.3 4.1C6 3.8 6 3.3 6.3 3l1-1c.3-.2.7-.2 1 0z"
+                  ></path>
+                </svg>
+                <span class="slds-assistive-text">Move Left</span>
+              </span>
+            </div>
+            <div if:false={activeControls.right}>
+              <span class="slds-icon_container" title="Move Right Disabled">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  class="slds-icon slds-icon-text-light"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M8.3 2l9.5 9.5c.3.3.3.7 0 1L8.3 22c-.3.2-.8.2-1.1 0l-1-1c-.2-.3-.2-.8 0-1.1l7.6-7.4c.2-.3.2-.7 0-1L6.3 4.1C6 3.8 6 3.3 6.3 3l1-1c.3-.2.7-.2 1 0z"
+                  ></path>
+                </svg>
+                <span class="slds-assistive-text">Move Left</span>
+              </span>
+            </div>
+          </div>
+
+          <ul class="box peersRight">
+            <template
+              for:each={peers.right}
+              for:item="item"
+              for:index="index"
+              if:false={isSmallWidth}
+            >
+              <li class="flex-item" key={item.Id}>
+                <c-arh-tile
+                  metadata={configInfo}
+                  ref-obj-name-fields={refObjNameFields}
+                  record={item}
+                  device-size="SMALL"
+                  is-more-items={isMoreItems}
+                  visual-type={visualType}
+                  onrecordclick={handlePeerRecordClick}
+                  data-dir="right"
+                  data-pos={index}
+                  data-id={item.Id}
+                ></c-arh-tile>
+              </li>
+            </template>
+          </ul>
+        </div>
+        <div class="parentnode">
+          <div class="divider"></div>
+        </div>
+      </template>
+    </div>
+  </template>
+</template>

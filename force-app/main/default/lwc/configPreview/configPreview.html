@@ -1,0 +1,55 @@
+<template>
+  <div class="rootnode">
+    <div class="topCircle"></div>
+  </div>
+  <div class="parentnode">
+    <div class="divider"></div>
+  </div>
+  <div class="parentnode">
+    <div class="tile">
+      <span class="slds-avatar slds-avatar_circle avatarcircle">
+        <abbr class="slds-avatar__initials slds-avatar__initials_inverse">
+          <span class={visualType.image}>
+            <lightning-icon
+              icon-name="utility:image"
+              alternative-text="Utility image"
+              title="Image"
+            >
+            </lightning-icon>
+          </span>
+          <span class={visualType.abbr}>AB</span>
+        </abbr>
+      </span>
+      <div class="slds-m-left_xx-small inlineItem">
+        <p><strong>Detail Field 1</strong></p>
+        <p>Detail Field 2</p>
+      </div>
+    </div>
+  </div>
+  <div class="parentnode">
+    <div class="divider"></div>
+  </div>
+  <div class="parentnode">
+    <div class="tile tileCurrent">
+      <span class={currentPreview.visual}>
+        <abbr class="slds-avatar__initials slds-avatar__initials_inverse">
+          <span class={visualType.image}>
+            <lightning-icon
+              icon-name="utility:image"
+              alternative-text="Utility image"
+              title="Image"
+            >
+            </lightning-icon>
+          </span>
+          <span class={visualType.abbr}>AB</span>
+        </abbr>
+      </span>
+      <div class="slds-m-left_xx-small inlineItem">
+        <p class={currentPreview.df1}><strong>Detail Field 1</strong></p>
+        <p class={currentPreview.df2}>Detail Field 2</p>
+        <p class={currentPreview.df3}>Detail Field 3</p>
+        <p class={currentPreview.df4}>Detail Field 4</p>
+      </div>
+    </div>
+  </div>
+</template>

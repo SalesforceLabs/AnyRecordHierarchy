@@ -1,0 +1,31 @@
+img {
+  border-radius: 50%;
+  height: 54px;
+  width: 54px;
+  object-fit: contain;
+}
+
+.avatarcircle {
+  border-radius: inherit;
+  height: 54px;
+  width: 54px;
+  border-radius: 50%;
+}
+
+.MEDIUM.current-record .avatarcircle {
+  height: 85px;
+  width: 85px;
+  margin-top: 4px;
+}
+
+.MEDIUM.current-record img {
+  height: 84px;
+  width: 85px;
+  margin-top: 4px;
+}
+
+.listView .avatarcircle,
+.listView img {
+  height: 40px;
+  width: 40px;
+}

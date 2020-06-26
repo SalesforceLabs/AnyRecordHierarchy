@@ -1,0 +1,127 @@
+.flex-container {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  -ms-box-orient: horizontal;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.nowrap {
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+}
+
+/*
+.wrap {
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 10px;
+}*/
+
+.MEDIUM .wrap,
+.LARGE .wrap {
+  justify-content: space-between;
+  padding: 10px;
+  grid-template-columns: repeat(auto-fill, 215px);
+  /* flex-flow: column wrap; */
+  /* grid-gap: 1rem; */
+  /* grid-template-columns: repeat(auto-fill, 100px); */
+  display: grid;
+}
+
+.SMALL .wrap {
+  justify-content: space-between;
+  padding: 10px;
+  grid-template-columns: repeat(auto-fill, 100px);
+  /* flex-flow: column wrap; */
+  /* grid-gap: 1rem; */
+  /* grid-template-columns: repeat(auto-fill, 100px); */
+  display: grid;
+}
+
+.flex-item {
+  height: 50px;
+  margin: 10px;
+}
+
+.SMALL .flex-item {
+  height: 80px;
+  margin: 10px;
+}
+
+.inlineItem {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+img.inlineItem {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+}
+
+.marginLeft {
+  margin-left: 10px;
+}
+
+.inlineItem .name {
+  color: rgba(0, 68, 135, 1);
+  font-weight: 600;
+}
+
+.inlineItem .title {
+  color: rgba(0, 68, 135, 1);
+  font-weight: 100;
+}
+
+.myItem {
+  width: 200px;
+  height: 60px;
+  border-radius: 2.5em;
+  border: 1px solid rgb(221, 219, 218);
+}
+
+.norecord-outerdiv {
+  height: 100px;
+}
+
+.norecord-innerdiv {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-style: italic;
+  color: #004487;
+}
+
+.viewall {
+  border-top: 1px solid rgb(221, 219, 218);
+  /* border-right: 1px solid rgb(221, 219, 218);
+  border-bottom: 1px solid rgb(221, 219, 218); */
+  padding: 5px;
+}
+
+.viewall .span-viewall {
+  cursor: pointer;
+}
+
+.viewall .span-viewall:hover {
+  text-decoration-line: underline;
+}
+
+.pageInputWidth {
+  width: 3.5rem;
+}
+
+*,
+:before,
+:after {
+  box-sizing: border-box;
+}

@@ -1,0 +1,187 @@
+<template>
+  <template if:true={isMobile}>
+    <c-search
+      search-object={objectApiName}
+      display-field={searchDisplayField}
+      relation-field={relationField}
+      mode="child"
+      parent-record-id={parentRecordId}
+      onrecordselect={handleRecordClick}
+    >
+    </c-search>
+    <div class="MEDIUM slds-var-m-top_small">
+      <ul class="slds-has-dividers_bottom-space">
+        <template for:each={paginatedChilds} for:item="record">
+          <li class="slds-item" key={record.Id}>
+            <c-arh-tile
+              metadata={configInfo}
+              ref-obj-name-fields={refObjNameFields}
+              record={record}
+              device-size="MEDIUM"
+              visual-type={visualType}
+              is-more-items={isDefaultItems}
+              mode="list"
+              onrecordclick={handleRecordClick}
+            ></c-arh-tile>
+          </li>
+        </template>
+      </ul>
+      <div class="slds-text-align_center slds-var-m-vertical_x-small">
+        {modalFooterData.totalChilds}
+      </div>
+      <div
+        class="slds-var-m-bottom_x-small slds-grid slds-grid_align-center slds-grid_vertical-align-center"
+      >
+        <div class="slds-col">
+          <lightning-button-icon
+            icon-name="utility:chevronleft"
+            variant="border-filled"
+            alternative-text="Previous"
+            class="slds-var-m-left_xx-small"
+            title="Previous"
+            onclick={prevPage}
+            disabled={modalFooterData.prevDisabled}
+          ></lightning-button-icon>
+        </div>
+        <div class="slds-col slds-var-m-left_xx-small pageInputWidth">
+          <div>
+            <lightning-input
+              type="number"
+              name="pageNumber"
+              variant="label-hidden"
+              value={pageNumber}
+              onchange={changePage}
+            ></lightning-input>
+          </div>
+        </div>
+        <div class="slds-col slds-var-m-left_xx-small">
+          of {numberOfPages}
+        </div>
+        <div class="slds-col">
+          <lightning-button-icon
+            icon-name="utility:chevronright"
+            variant="border-filled"
+            alternative-text="Previous"
+            class="slds-var-m-left_xx-small"
+            title="Next"
+            onclick={nextPage}
+            disabled={modalFooterData.nextDisabled}
+          ></lightning-button-icon>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <!--more child modal start-->
+  <template if:true={isDesktop}>
+    <section
+      role="dialog"
+      tabindex="-1"
+      aria-labelledby="modal-heading-01"
+      aria-modal="true"
+      aria-describedby="modal-content-id-1"
+      class={modalClass}
+    >
+      <div class="slds-modal__container">
+        <header class="slds-modal__header">
+          <button
+            class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+            title="Close"
+            onclick={closeModal}
+          >
+            <lightning-icon
+              icon-name="utility:close"
+              alternative-text="Close Modal"
+              variant="inverse"
+              size="small"
+            >
+            </lightning-icon>
+          </button>
+          <h2
+            id="modal-heading-01"
+            class="slds-text-heading_medium slds-modal__title slds-hyphenate"
+          >
+            View All Child Records
+          </h2>
+        </header>
+        <div class="slds-modal__content slds-p-around_medium">
+          <template if:true={isModalOpen}>
+            <c-search
+              search-object={objectApiName}
+              display-field={searchDisplayField}
+              relation-field={relationField}
+              mode="child"
+              parent-record-id={parentRecordId}
+              onrecordselect={handleRecordClick}
+            >
+            </c-search>
+            <div class="MEDIUM">
+              <ul class="flex-container wrap">
+                <template for:each={paginatedChilds} for:item="record">
+                  <li class="flex-item" key={record.Id}>
+                    <c-arh-tile
+                      metadata={configInfo}
+                      ref-obj-name-fields={refObjNameFields}
+                      record={record}
+                      device-size="MEDIUM"
+                      visual-type={visualType}
+                      is-more-items={isDefaultItems}
+                      onrecordclick={handleRecordClick}
+                    ></c-arh-tile>
+                  </li>
+                </template>
+              </ul>
+            </div>
+          </template>
+        </div>
+        <footer class="slds-modal__footer">
+          <div
+            class="slds-grid slds-grid_align-center slds-grid_vertical-align-center"
+          >
+            <div class="slds-col">
+              {modalFooterData.totalChilds} •
+            </div>
+            <div class="slds-col">
+              <lightning-button-icon
+                icon-name="utility:chevronleft"
+                variant="border-filled"
+                alternative-text="Previous"
+                class="slds-var-m-left_xx-small"
+                title="Previous"
+                onclick={prevPage}
+                disabled={modalFooterData.prevDisabled}
+              ></lightning-button-icon>
+            </div>
+            <div class="slds-col slds-var-m-left_xx-small pageInputWidth">
+              <div>
+                <lightning-input
+                  type="number"
+                  name="pageNumber"
+                  variant="label-hidden"
+                  value={pageNumber}
+                  onchange={changePage}
+                ></lightning-input>
+              </div>
+            </div>
+            <div class="slds-col slds-var-m-left_xx-small">
+              of {numberOfPages}
+            </div>
+            <div class="slds-col">
+              <lightning-button-icon
+                icon-name="utility:chevronright"
+                variant="border-filled"
+                alternative-text="Previous"
+                class="slds-var-m-left_xx-small"
+                title="Next"
+                onclick={nextPage}
+                disabled={modalFooterData.nextDisabled}
+              ></lightning-button-icon>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </section>
+    <div class={modalBackdropClass}></div>
+  </template>
+  <!--more child modal end-->
+</template>

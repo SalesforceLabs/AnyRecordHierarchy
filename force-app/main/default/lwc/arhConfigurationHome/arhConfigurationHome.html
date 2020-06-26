@@ -1,0 +1,182 @@
+<template>
+  <article class="slds-card" style="padding:0px;">
+    <div class="slds-card__header slds-grid" style="padding: 0px;">
+      <header class="header slds-media slds-media_center slds-has-flexi-truncate">
+        <div class="slds-media__figure">
+          <span class="slds-icon_container slds-icon-standard-account" title="account">
+            <lightning-icon icon-name="standard:hierarchy" alternative-text="Record Hierarchy" title="Record Hierarchy">
+            </lightning-icon>
+
+            <span class="slds-assistive-text">account</span>
+          </span>
+        </div>
+        <div class="slds-media__body">
+          <h2 class="slds-card__header-title">
+
+            <span>Any Record Hierarchy Configuration</span>
+          </h2>
+        </div>
+      </header>
+    </div>
+    <div class="slds-card__body">
+      <div class="demo-only demo-only--sizing slds-grid slds-wrap"
+        style="background-color: white; padding: 0px 30px 0px 30px;">
+        <div class="slds-size_1-of-4">
+          <div class="slds-box_x-small slds-text-align_center slds-m-around_x-small">
+            <span style="font-size: 14px; font-weight: bold;">Configurations</span>
+          </div>
+        </div>
+        <div class="slds-size_2-of-4">
+          <div class="slds-box_x-small slds-text-align_center slds-m-around_x-small">
+            <span style="font-size: 14px; font-weight: bold;">Configuration Details {configName}</span>
+          </div>
+        </div>
+        <div class="slds-size_1-of-4">
+          <div class="slds-box_x-small slds-text-align_center slds-m-around_x-small">
+            <span style="font-size: 14px; font-weight: bold;">Preview</span>
+          </div>
+        </div>
+      </div>
+      <div class="demo-only demo-only--sizing slds-grid slds-wrap"
+        style="background-color: white; padding: 0px 30px 30px 30px;">
+        <div class="slds-size_1-of-4">
+          <div class="slds-m-around_x-small"
+            style="border:1px solid #dddbda;height: 70vh; overflow: auto; border-radius: var(--lwc-borderRadiusMedium,0.25rem);          ">
+            <div class="slds-clearfix slds-m-bottom_small " style="margin-top:10px;">
+              <span style="display:flex">
+                <lightning-input type="text" style="display:flex;float: left;width: 80%;" placeholder="Search"
+                  onchange={showFilterResult} value={searchString}>
+                </lightning-input>
+                <lightning-button variant="brand-outline" label="New" title="Primary action with lighter look"
+                  onclick={handleNew} class="slds-m-left_x-small" style="margin-right:0.5em"></lightning-button>
+              </span>
+            </div>
+            <ul class="slds-has-dividers_top-space">
+              <template for:each={myList} for:item="item" for:index="indexVar">
+                <li class="slds-item configNameRow" key={item.Id} id={item.Id} onclick={passValuesToForm}>
+                  <p class="slds-truncate">{item.Name}</p>
+                </li>
+              </template>
+            </ul>
+          </div>
+        </div>
+        <div class="slds-size_2-of-4">
+          <div class="slds-box slds-box_x-small slds-m-around_x-small"
+            style="justify-content: center; display: flex;min-height:400px;">
+            <!-- pop up code start-->
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+              aria-describedby="modal-content-id-1" class={modalClass}>
+              <div class="slds-modal__container">
+                <header class="slds-modal__header slds-theme_error slds-theme_alert-texture">
+                  <button class=" slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close"
+                    onclick={closeModal}>
+                    <lightning-icon icon-name="utility:close" alternative-text="Close Modal" variant="inverse"
+                      size="small">
+                    </lightning-icon>
+                  </button>
+                  <h2 id="modal-heading-01" class="slds-text-heading_medium slds-modal__title slds-hyphenate">
+                    Delete Record
+                  </h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                  <p>
+                    Do you want to delete configuration record {conName}?
+                  </p>
+                </div>
+                <footer class="slds-modal__footer">
+                  <lightning-button variant="neutral" label="No" title="Close" onclick={closeModal}>
+                  </lightning-button>
+                  <lightning-button variant="destructive" class="slds-m-left_x-small" label="Yes" title="Save"
+                    onclick={handleDelete}>
+                  </lightning-button>
+                </footer>
+              </div>
+            </section>
+            <div class={modalBackdropClass}></div>
+            <!-- pop up code end-->
+            <div style="width: 70%;">
+              <template if:true={illus}>
+                <c-illustration error-data={PropertyName}></c-illustration>
+              </template>
+              <template if:false={illus}>
+                <template if:true={loaded}>
+                  <div class="slds-p-around_medium">
+                    <lightning-input type="text" label="Configurations Name" value={conName} onchange={handleChange}
+                      disabled={isDisabledName} onfocus={updatePrev} onblur={remFoc} required>
+                    </lightning-input>
+                    <lightning-combobox name="progress" label="Object Name" value={myObjectName}
+                      placeholder="Select Object" onfocus={updatePrev} onblur={remFoc} options={itemsON}
+                      onchange={handleChange} disabled={isDisabled} required>
+                    </lightning-combobox>
+                    <lightning-combobox name="progress" onfocus={updatePrev} onblur={remFoc} label="Relationship Field"
+                      value={myLookupFld} placeholder="Select Relationship" options={itemsRF} onchange={handleChange}
+                      disabled={isDisabledRF} required>
+                    </lightning-combobox>
+
+                    <lightning-radio-group name="radioGroup" onfocus={updatePrev} onblur={remFoc} label="Visual Type"
+                      options={visOption} value={visType} type="button" onchange={handleChange} disabled={isDisabledvt}
+                      required>
+                    </lightning-radio-group>
+
+                    <lightning-combobox name="progress" onfocus={updatePrev} onblur={remFoc}
+                      label="Image/Abbreviation Field" value={value6} placeholder="Select Field" options={itemsVT}
+                      onchange={handleChange} disabled={isDisabled6} required>
+                    </lightning-combobox>
+                    <lightning-combobox name="progress" onfocus={updatePrev} onblur={remFoc} label="Search Field"
+                      value={value7} placeholder="Select Field" options={itemsSF} onchange={handleChange}
+                      disabled={isDisabled7} required>
+                    </lightning-combobox>
+                    <lightning-combobox name="progress" onfocus={updatePrev} onblur={remFoc} label="Detail Field 1"
+                      value={value1} placeholder="Select Field" options={itemsDT} onchange={handleChange}
+                      disabled={isDisabled1} required>
+                    </lightning-combobox>
+                    <lightning-combobox name="progress" onfocus={updatePrev} onblur={remFoc} label="Detail Field 2"
+                      value={value2} placeholder="Select Field" options={itemsDT} onchange={handleChange}
+                      disabled={isDisabled2} required></lightning-combobox>
+                    <lightning-combobox name="progress" onfocus={updatePrev} onblur={remFoc} label="Detail Field 3"
+                      value={value3} placeholder="Select Field" options={itemsDT} onchange={handleChange}
+                      disabled={isDisabled3}>
+                    </lightning-combobox>
+                    <lightning-combobox name="progress" onfocus={updatePrev} onblur={remFoc} label="Detail Field 4"
+                      value={value4} placeholder="Select Field" options={itemsDT} onchange={handleChange}
+                      disabled={isDisabled4}>
+                    </lightning-combobox>
+                    <lightning-combobox name="progress" onfocus={updatePrev} onblur={remFoc} label="Detail Field 5"
+                      value={value5} placeholder="Select Field" options={itemsDT} onchange={handleChange}
+                      disabled={isDisabled5}>
+                    </lightning-combobox>
+                  </div>
+                  <div class="slds-align_absolute-center" style="height:5rem">
+                    <template if:true={areButtonsVisible}>
+                      <lightning-button variant="brand" label="Save" title="Primary action with lighter look"
+                        onclick={handleSave} class="slds-m-left_x-small" disabled={enableButtons}>
+                      </lightning-button>
+                      <lightning-button variant="brand-outline" label="Cancel" title="Primary action with lighter look"
+                        onclick={handleCancel} class="slds-m-left_x-small">
+                      </lightning-button>
+
+                      <template if:true={showDelete}>
+                        <lightning-button variant="destructive" label="Delete" title="Primary action with lighter look"
+                          onclick={showModal} class="slds-m-left_x-small">
+                        </lightning-button>
+                      </template>
+                    </template>
+                  </div>
+                </template>
+                <template if:false={loaded}>
+                  <lightning-spinner alternative-text="Loading" variant="brand"></lightning-spinner>
+                </template>
+              </template>
+            </div>
+          </div>
+        </div>
+
+        <div class="slds-size_1-of-4">
+          <div class="slds-box slds-m-around_x-small">
+            <c-config-preview visual={visualType} field={currentEditingField}></c-config-preview>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</template>

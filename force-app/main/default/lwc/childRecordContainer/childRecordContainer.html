@@ -1,0 +1,56 @@
+<template>
+  <div
+    style="border: 1px solid rgb(221, 219, 218); margin: 0;"
+    if:true={showParents}
+  >
+    <div class="slds-card__body slds-card__body_inner">
+      <template if:true={showSome}>
+        <div class={deviceSize} if:true={isChildRecords}>
+          <ul class="flex-container wrap">
+            <template for:each={childsToShow} for:item="record">
+              <li class="flex-item" key={record.Id}>
+                <c-arh-tile
+                  metadata={configInfo}
+                  ref-obj-name-fields={refObjNameFields}
+                  record={record}
+                  device-size={deviceSize}
+                  visual-type={visualType}
+                  is-more-items={isDefaultItems}
+                  onrecordclick={handleRecordClick}
+                ></c-arh-tile>
+              </li>
+            </template>
+          </ul>
+        </div>
+      </template>
+      <div if:false={isChildRecords} class="norecord-outerdiv">
+        <div class="norecord-innerdiv">
+          <span>No child records found!</span>
+        </div>
+      </div>
+    </div>
+    <template if:true={isMoreFlag}>
+      <div class="viewall">
+        <div class="norecord-innerdiv">
+          <span class="span-viewall" onclick={showMoreItems}>View all</span>
+        </div>
+      </div>
+    </template>
+  </div>
+
+  <!-- <template if:true={showViewAll}>
+    <c-view-all-child-records
+      child-records={childRecords}
+      config-info={configInfo}
+      ref-obj-name-fields={refObjNameFields}
+      device-size={flexipageRegionWidth}
+      visual-type={visualType}
+      relation-field={relationField}
+      search-display-field={searchDisplayField}
+      parent-record-id={parentRecordId}
+      object-api-name={objectApiName}
+      onrecordselect={handleRecordClick}
+    >
+    </c-view-all-child-records>
+  </template> -->
+</template>

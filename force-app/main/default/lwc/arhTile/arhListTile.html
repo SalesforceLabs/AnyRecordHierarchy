@@ -1,0 +1,37 @@
+<template>
+  <article class="slds-tile slds-media" onclick={selectRecord}>
+    <div class="slds-media__figure">
+      <c-avatar
+        if:true={visual.Abbreviation}
+        initials={fieldData.ARH__Visual_Field__c.value}
+        device-size="listView"
+      ></c-avatar>
+      <c-avatar
+        if:true={visual.Image}
+        src={fieldData.ARH__Visual_Field__c.value}
+        device-size="listView"
+      ></c-avatar>
+    </div>
+    <div class="slds-media__body">
+      <h3 class="slds-tile__title slds-truncate"></h3>
+      <div class="slds-tile__detail">
+        <template if:true={metadata.ARH__Detail_Field_1__c}>
+          <c-field
+            field-metadata={metadata.ARH__Detail_Field_1__c}
+            field-data={fieldData.ARH__Detail_Field_1__c}
+            variant="no-width"
+          ></c-field>
+        </template>
+        <template if:true={metadata.ARH__Detail_Field_2__c}>
+          <div>
+            <c-field
+              field-metadata={metadata.ARH__Detail_Field_2__c}
+              field-data={fieldData.ARH__Detail_Field_2__c}
+              variant="no-width"
+            ></c-field>
+          </div>
+        </template>
+      </div>
+    </div>
+  </article>
+</template>

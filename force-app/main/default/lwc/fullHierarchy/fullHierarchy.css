@@ -1,0 +1,27 @@
+.divider {
+  width: 1px;
+  height: 50px;
+  background: rgb(221, 219, 218);
+}
+
+.slds-icon-action-back {
+  background-color: #004487;
+}
+.parentnode {
+  display: flex;
+  justify-content: center;
+}
+
+.rootnode {
+  display: flex;
+  justify-content: center;
+}
+
+.scroll-hierarchy {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.rootnode.icon-up .slds-icon {
+  fill: #004487;
+}

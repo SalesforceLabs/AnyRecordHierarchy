@@ -1,0 +1,26 @@
+{
+    "packageDirectories": [
+        {
+            "path": "force-app",
+            "package": "AnyRecordHierarchyv2",
+            "versionName": "ver 0.3",
+            "versionNumber": "3.0.0.NEXT",
+            "default": true
+        }
+    ],
+    "namespace": "ARH",
+    "sfdcLoginUrl": "https://login.salesforce.com",
+    "sourceApiVersion": "48.0",
+    "packageAliases": {
+        "AnyRecordHierarchyv2": "0Ho3h000000TN4sCAG",
+        "AnyRecordHierarchyv2@0.1.0-1": "04t3h00000246o9AAA",
+        "AnyRecordHierarchyv2@0.1.0-2": "04t3h00000246oJAAQ",
+        "AnyRecordHierarchyv2@1.1.0-1": "04t3h00000246oOAAQ",
+        "AnyRecordHierarchyv2@1.1.0-2": "04t3h00000246oTAAQ",
+        "AnyRecordHierarchyv2@1.2.0-1": "04t3h000003Y5HdAAK",
+        "AnyRecordHierarchyv2@0.1.0-3": "04t3h000003Y50sAAC",
+        "AnyRecordHierarchyv2@1.2.0-2": "04t3h000003Y555AAC",
+        "AnyRecordHierarchyv2@0.1.0-4": "04t3h000003Y5HYAA0",
+        "AnyRecordHierarchyv2@3.0.0-1": "04t3h000003Y5LvAAK"
+    }
+}

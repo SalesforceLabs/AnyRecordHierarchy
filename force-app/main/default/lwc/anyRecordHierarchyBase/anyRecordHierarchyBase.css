@@ -1,0 +1,41 @@
+.main-container {
+  background-color: white;
+}
+.SMALL .sub-container-1 {
+  padding: 30px;
+  margin: auto;
+}
+.sub-container-2 {
+  padding: 10px;
+}
+/* 
+.slds-spinner_container {
+  position: relative;
+}
+
+.slds-spinner {
+  position: relative;
+  top: 200px;
+}
+ */
+.MEDIUM .search,
+.LARGE .search {
+  display: none;
+}
+
+.SMALL .search-top {
+  display: none;
+}
+
+.MEDIUM .slds-card,
+.SMALL .slds-card {
+  border: 1px solid rgb(221, 219, 218);
+  padding: 0px 0px 20px;
+}
+
+.LARGE .header,
+.MEDIUM .header,
+.SMALL .header {
+  background-color: #f3f2f2;
+  padding: 10px;
+}

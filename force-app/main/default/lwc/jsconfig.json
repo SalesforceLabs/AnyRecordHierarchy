@@ -1,0 +1,53 @@
+{
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "baseUrl": ".",
+        "paths": {
+            "c/anyRecordHierarchyBase": [
+                "anyRecordHierarchyBase/anyRecordHierarchyBase.js"
+            ],
+            "c/arhConfigurationHome": [
+                "arhConfigurationHome/arhConfigurationHome.js"
+            ],
+            "c/arhTile": [
+                "arhTile/arhTile.js"
+            ],
+            "c/avatar": [
+                "avatar/avatar.js"
+            ],
+            "c/childRecordContainer": [
+                "childRecordContainer/childRecordContainer.js"
+            ],
+            "c/configPreview": [
+                "configPreview/configPreview.js"
+            ],
+            "c/field": [
+                "field/field.js"
+            ],
+            "c/fullHierarchy": [
+                "fullHierarchy/fullHierarchy.js"
+            ],
+            "c/illustration": [
+                "illustration/illustration.js"
+            ],
+            "c/parentRecordContainer": [
+                "parentRecordContainer/parentRecordContainer.js"
+            ],
+            "c/search": [
+                "search/search.js"
+            ],
+            "c/viewAllChildRecords": [
+                "viewAllChildRecords/viewAllChildRecords.js"
+            ]
+        }
+    },
+    "include": [
+        "**/*",
+        "../../../../.sfdx/typings/lwc/**/*.d.ts"
+    ],
+    "typeAcquisition": {
+        "include": [
+            "jest"
+        ]
+    }
+}

@@ -1,0 +1,61 @@
+<template>
+  <div if:true={parentHierarchy}>
+    <div class="rootnode icon-up" if:true={dynamicRoot} onclick={refreshParent}>
+      <svg
+        focusable="false"
+        data-key="chevronup"
+        aria-hidden="true"
+        class="slds-icon slds-icon-text-default slds-icon_small"
+      >
+        <use
+          xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg?cache=9.31.2-1#chevronup"
+        ></use>
+      </svg>
+    </div>
+    <div class="rootnode" if:false={dynamicRoot}>
+      <svg
+        focusable="false"
+        data-key="chevronup"
+        aria-hidden="true"
+        class="slds-icon slds-icon-text-default slds-icon_small"
+      >
+        <use
+          xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg?cache=9.31.2-1#chevronup"
+        ></use>
+      </svg>
+    </div>
+    <div class="parentnode">
+      <div class="divider"></div>
+    </div>
+    <template if:true={parentHierarchy}>
+      <div style="height: auto; overflow-y: scroll; max-height: 500px;">
+        <template for:each={parentHierarchy} for:item="record">
+          <div key={record.Id}>
+            <c-arh-tile
+              metadata={configInfo}
+              record={record}
+              device-size={deviceSize}
+              is-more-items={isMoreItems}
+              visual-type={visualType}
+              ref-obj-name-fields={refObjNameFields}
+              onrecordclick={handleRecordClick}
+            ></c-arh-tile>
+            <div class="parentnode">
+              <div class="divider"></div>
+            </div>
+          </div>
+        </template>
+      </div>
+    </template>
+    <div class="parentnode" onclick={gotoHome}>
+      <div>
+        <lightning-icon
+          icon-name="action:back"
+          alternative-text="Back"
+          title="Back"
+          size="xx-small"
+        ></lightning-icon>
+      </div>
+    </div>
+  </div>
+</template>
